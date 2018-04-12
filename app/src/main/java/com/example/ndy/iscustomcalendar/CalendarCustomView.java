@@ -117,6 +117,6 @@ public class CalendarCustomView extends LinearLayout {
         currentDate.setText(sDate);
         mAdapter = new GridAdapter(context, dayValueInCells, cal, mEvents);
         calendarGridView.setAdapter(mAdapter);
-        
+
     }
 }
