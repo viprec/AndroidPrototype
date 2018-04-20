@@ -1,13 +1,13 @@
 package com.example.ndy.iscustomcalendar;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CustomCalendarActivity extends AppCompatActivity {
+public class CustomCalendarActivity extends SingleFragmentActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_calendar);
+    protected Fragment createFragment() {
+        return new CalendarFragment();
     }
 }
