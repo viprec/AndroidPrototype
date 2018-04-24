@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.ndy.iscustomcalendar.CustomCalendarActivity">
-    <com.example.ndy.iscustomcalendar.CalendarCustomView
+    <!--<com.example.ndy.iscustomcalendar.CalendarCustomView
         android:id="@+id/custom_calendar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.example.ndy.iscustomcalendar.CalendarCustomView>
+    </com.example.ndy.iscustomcalendar.CalendarCustomView>-->
 </LinearLayout>

@@ -8,6 +8,6 @@ public class CustomCalendarActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        return new CalendarFragment();
+        return new CustomCalendarFragment();
     }
 }
