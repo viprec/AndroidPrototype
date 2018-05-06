@@ -1,13 +1,17 @@
 package com.example.ndy.iscustomcalendar;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ndy.entity.EventObjects;
@@ -49,23 +53,32 @@ public class GridAdapter extends ArrayAdapter {
 
         View view = convertView;
         if (view == null) {
-            view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
+            view = mInflater.inflate(R.layout.singel_cell_frame_layout, parent, false);
         }
 
         //Add day to calendar
-        TextView cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
+        TextView cellNumber = (TextView) view.findViewById(R.id.textView1);
         cellNumber.setText(String.valueOf(dayValue));
 
+        TextView superSCript = (TextView) view.findViewById(R.id.textView_super_script);
+        superSCript.setText("");
+
         if (displayMonth == currentMonth && displayYear == currentYear) {
-            view.setBackgroundColor(Color.parseColor("#FF5733"));
+            view.setBackgroundColor(Color.parseColor("#26A69A"));
+            if(dayValue % 5 == 0){
+                superSCript.setText(String.valueOf(dayValue));
+            }
         } else{
             view.setBackgroundColor(Color.parseColor("#cccccc"));
             cellNumber.setTextColor(Color.parseColor("#C0C0C0"));
+            ImageView imageView = view.findViewById(R.id.imageView_event_number);
+            imageView.setVisibility(View.INVISIBLE);
+            //cellNumber.setBackgroundResource(R.drawable.cell_border);
         }
 
         //addEvents to the calendar
-        TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
-        Calendar eventCalendar = Calendar.getInstance();
+       /* TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
+        Calendar eventCalendar = Calendar.getInstance();*/
 
       /*  for (int i =0; i<allEvents.size(); i++) {
             eventCalendar.setTime(allEvents.get(i).getDate());
@@ -77,6 +90,54 @@ public class GridAdapter extends ArrayAdapter {
         }*/
         return view;
     }
+
+
+    /* getView() Original before frameLayoutBorder
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Date mDate = monthlyDates.get(position);
+        //todo perhaps this should be an instance variable to avoid costly instantiation
+        Calendar dateCal = Calendar.getInstance();
+        dateCal.setTime(mDate);
+
+        int dayValue = dateCal.get(Calendar.DAY_OF_MONTH);
+        int displayMonth = dateCal.get(Calendar.MONTH) +1;
+        int displayYear = dateCal.get(Calendar.YEAR);
+        int currentMonth = currentDate.get(Calendar.MONTH) +1;
+        int currentYear = currentDate.get(Calendar.YEAR);
+
+        View view = convertView;
+        if (view == null) {
+            view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
+        }
+
+        //Add day to calendar
+        TextView cellNumber = (TextView) view.findViewById(R.id.calendar_cell);
+        cellNumber.setText(String.valueOf(dayValue));
+
+        if (displayMonth == currentMonth && displayYear == currentYear) {
+            view.setBackgroundColor(Color.parseColor("#26A69A"));
+        } else{
+            view.setBackgroundColor(Color.parseColor("#cccccc"));
+            cellNumber.setTextColor(Color.parseColor("#C0C0C0"));
+            cellNumber.setBackgroundResource(R.drawable.cell_border);
+        }
+
+        //addEvents to the calendar
+       *//* TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
+        Calendar eventCalendar = Calendar.getInstance();*//*
+
+      *//*  for (int i =0; i<allEvents.size(); i++) {
+            eventCalendar.setTime(allEvents.get(i).getDate());
+            if(dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH)
+                    && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
+                    && displayYear == eventCalendar.get(Calendar.YEAR)){
+                eventIndicator.setBackgroundColor(Color.parseColor("#FF4081"));
+            }
+        }*//*
+        return view;
+    }*/
 
     @Override
     public int getCount(){
