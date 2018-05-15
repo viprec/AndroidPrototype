@@ -26,7 +26,7 @@ public class GridAdapter extends ArrayAdapter {
 
     public GridAdapter(Context context, List<Date> monthlyDates,
             Calendar currentDate, List<EventObjects> allEvents) {
-        super(context, R.layout.single_cell_layout);
+        super(context, R.layout.sincle_cell_custom_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
         this.allEvents = allEvents;
@@ -49,23 +49,29 @@ public class GridAdapter extends ArrayAdapter {
 
         View view = convertView;
         if (view == null) {
-            view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
+            view = mInflater.inflate(R.layout.sincle_cell_custom_layout, parent, false);
         }
 
+
+
         //Add day to calendar
-        TextView cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
-        cellNumber.setText(String.valueOf(dayValue));
+        /*TextView cellNumber = (TextView) cellCustView.findViewById(R.id.calendar_date_id);
+        cellNumber.setText(String.valueOf(dayValue));*/
+        CellCustomView cellCustView = (CellCustomView) view.findViewById(R.id.myCellCustomView);
+        cellCustView.setRectStr(String.valueOf(dayValue));
+
 
         if (displayMonth == currentMonth && displayYear == currentYear) {
-            view.setBackgroundColor(Color.parseColor("#FF5733"));
+            //cellCustView.setBackgroundColor(Color.parseColor("#FF5733"));
         } else{
-            view.setBackgroundColor(Color.parseColor("#cccccc"));
-            cellNumber.setTextColor(Color.parseColor("#C0C0C0"));
+           /* cellCustView.setBackgroundColor(Color.parseColor("#cccccc"));
+            cellNumber.setTextColor(Color.parseColor("#C0C0C0"));*/
+            cellCustView.setRectStr("0");
         }
 
         //addEvents to the calendar
-        TextView eventIndicator = (TextView) view.findViewById(R.id.event_id);
-        Calendar eventCalendar = Calendar.getInstance();
+        //TextView eventIndicator = (TextView) cellCustView.findViewById(R.id.event_id);
+        //Calendar eventCalendar = Calendar.getInstance();
 
       /*  for (int i =0; i<allEvents.size(); i++) {
             eventCalendar.setTime(allEvents.get(i).getDate());
