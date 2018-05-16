@@ -13,6 +13,7 @@ public class CellCustomView extends View {
 
     private Paint paintRect;
     private Paint paintCircle;
+    private Paint paintText;
     private Integer circleColor;
     private String circleText;
     private Integer circleTextColor;
@@ -21,6 +22,8 @@ public class CellCustomView extends View {
     private int paddingFromContainerEdge = 30;
     private String rectStr = "";
     private String circleStr = "";
+    private boolean drawRect;
+    private boolean drawCircle;
 
     public CellCustomView(Context context) {
         super(context);
@@ -46,25 +49,29 @@ public class CellCustomView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        drawRect(canvas);
-        drawSuperScriptCircle(canvas, "5");
+        drawText(canvas);
+
+        if(isDrawRect())
+            drawRect(canvas);
+        if(isDrawRect())
+            drawSuperScriptCircle(canvas, circleStr);
     }
 
     private void drawSuperScriptCircle(Canvas canvas, String s) {
 
         paintCircle.setColor(Color.RED);
-        paintCircle.setTextSize(10f);
+        paintCircle.setTextSize(30f);
 
         int superScriptX = getWidth() - paddingFromContainerEdge;
         int superSCriptY = paddingFromContainerEdge;
         canvas.drawCircle(superScriptX,
                 superSCriptY,
-                paddingFromContainerEdge,
+                paddingFromContainerEdge-5,
                 paintCircle);
 
         paintCircle.setColor(Color.BLUE);
         paintCircle.setTextAlign(Paint.Align.CENTER);
-        canvas.drawText(s, superScriptX, superSCriptY, paintCircle);
+        canvas.drawText(s, superScriptX, superSCriptY+5, paintCircle);
     }
 
     private void drawRect(Canvas canvas) {
@@ -75,13 +82,13 @@ public class CellCustomView extends View {
         path.lineTo(paddingFromContainerEdge, paddingFromContainerEdge);
 
         canvas.drawPath(path, paintRect);
+    }
 
+    private void drawText(Canvas canvas) {
         int centerX = (getWidth() - paddingFromContainerEdge) / 2;
-        int centerY = (getHeight() - paddingFromContainerEdge) / 2;
-        paintRect.setTextSize(45);
-        paintRect.setColor(Color.BLUE);
+        int centerY = (getHeight() - paddingFromContainerEdge) / 2 +30;
 
-        canvas.drawText(rectStr,centerX, centerY, paintRect);
+        canvas.drawText(rectStr,centerX, centerY, paintText);
     }
 
     @Override
@@ -97,10 +104,15 @@ public class CellCustomView extends View {
     private void init(){
         paintRect = new Paint();
         paintRect.setColor(Color.BLUE);
-        paintRect.setStrokeWidth(10);
+        paintRect.setStrokeWidth(2);
         paintRect.setStyle(Paint.Style.STROKE);
 
         paintCircle = new Paint();
+
+        paintText = new Paint();
+        paintText.setTextSize(45);
+        paintText.setColor(Color.GRAY);
+        paintText.setStyle(Paint.Style.FILL);
 
         path = new Path();
 
@@ -120,5 +132,21 @@ public class CellCustomView extends View {
 
     public void setCircleStr(String circleStr) {
         this.circleStr = circleStr;
+    }
+
+    public boolean isDrawRect() {
+        return drawRect;
+    }
+
+    public void setDrawRect(boolean drawRect) {
+        this.drawRect = drawRect;
+    }
+
+    public boolean isDrawCircle() {
+        return drawCircle;
+    }
+
+    public void setDrawCircle(boolean drawCircle) {
+        this.drawCircle = drawCircle;
     }
 }

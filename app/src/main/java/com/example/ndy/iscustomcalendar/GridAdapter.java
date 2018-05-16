@@ -59,6 +59,11 @@ public class GridAdapter extends ArrayAdapter {
         cellNumber.setText(String.valueOf(dayValue));*/
         CellCustomView cellCustView = (CellCustomView) view.findViewById(R.id.myCellCustomView);
         cellCustView.setRectStr(String.valueOf(dayValue));
+        if(dayValue % 2 == 0){
+            cellCustView.setDrawRect(true);
+            cellCustView.setDrawCircle(true);
+            cellCustView.setCircleStr(String.valueOf(dayValue));
+        }
 
 
         if (displayMonth == currentMonth && displayYear == currentYear) {
@@ -66,7 +71,8 @@ public class GridAdapter extends ArrayAdapter {
         } else{
            /* cellCustView.setBackgroundColor(Color.parseColor("#cccccc"));
             cellNumber.setTextColor(Color.parseColor("#C0C0C0"));*/
-            cellCustView.setRectStr("0");
+           cellCustView.setBackgroundColor(Color.parseColor("#cccccc"));
+           cellCustView.setRectStr(String.valueOf(dayValue));
         }
 
         //addEvents to the calendar
