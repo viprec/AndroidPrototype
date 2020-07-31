@@ -106,10 +106,13 @@ public class CellCustomView extends View {
         paintRect.setColor(Color.BLUE);
         paintRect.setStrokeWidth(2);
         paintRect.setStyle(Paint.Style.STROKE);
+        paintRect.setAntiAlias(true);
 
         paintCircle = new Paint();
+        paintCircle.setAntiAlias(true);
 
         paintText = new Paint();
+        paintText.setAntiAlias(true);
         paintText.setTextSize(45);
         paintText.setColor(Color.GRAY);
         paintText.setStyle(Paint.Style.FILL);
